@@ -5,62 +5,55 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
-  ImageBackground
+  ImageBackground,
+  AsyncStorage
 } from "react-native";
-import api from "./../services/api";
+
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-export default function Carteirinha() {
-  const [user, setUser] = useState("");
-
-  async function handleSocio() {
-    try {
-      const socio = await api.get("/listar/socio", {
-        params: { cpf: "02614566284" }
-      });
-
-      setUser(socio.data);
-      console.log(socio.data);
-    } catch (error) {
-      console.log(error);
-    }
+export default function Carteirinha({ navigation }) {
+  const [user,setUser] = useState("")
+  async function handleSair() {
+ 
+    navigation.navigate("Login")
   }
+
 
   return (
     <ImageBackground
-    style={{ flex: 1,width: '100%', height: '100%' }}
-    source={{ uri: "https://carteirinha-atletica.s3-sa-east-1.amazonaws.com/background2.png" }}
-  >
-    <View style={styles.container}>
-     
-      <Text style={styles.header}>SÓCIO</Text>
-      <Text style={styles.atletica}>A. A. A. M - UFRR</Text>
+      style={{ flex: 1, width: '100%', height: '100%' }}
+      source={{ uri: "https://carteirinha-atletica.s3-sa-east-1.amazonaws.com/background2.png" }}
+    >
+      <View style={styles.container}>
 
-      <View style={styles.imgView}>
-        <Image
-          style={styles.imgProfile}
-          source={{
-            uri: "https://avatars3.githubusercontent.com/u/28845658?s=460&v=4"
-          }}
-        />
+        <Text style={styles.header}>SÓCIO</Text>
+        <Text style={styles.atletica}>A. A. A. M - UFRR</Text>
+
+        <View style={styles.imgView}>
+          <Image
+            style={styles.imgProfile}
+            source={{
+              uri: "https://avatars3.githubusercontent.com/u/28845658?s=460&v=4"
+            }}
+          />
+        </View>
+
+        {user.isValid ? (
+          <Text style={styles.valid}>VALIDO</Text>
+        ) : (
+            <Text style={styles.invalid}>INVALIDO</Text>
+          )}
+
+        <Text style={styles.title}>{user.name}</Text>
+        <Text style={styles.description}>MATRÍCULA: {user.matricula}</Text>
+        <Text style={styles.description}>CPF: {user.cpf}</Text>
+        <Text style={styles.description}>CURSO: {user.curso}</Text>
+
+        <TouchableOpacity onPress={handleSair} style={styles.button}>
+          <Text style={styles.buttonText}>SAIR</Text>
+          <MaterialCommunityIcons name="exit-run" size={20} color="#FFF" />
+        </TouchableOpacity>
+
       </View>
-
-      {user.isValid ? (
-        <Text style={styles.valid}>VALIDO</Text>
-      ) : (
-        <Text style={styles.invalid}>INVALIDO</Text>
-      )}
-
-      <Text style={styles.title}>{user.name}</Text>
-      <Text style={styles.description}>MATRÍCULA: {user.matricula}</Text>
-      <Text style={styles.description}>CPF: {user.cpf}</Text>
-      <Text style={styles.description}>CURSO: {user.curso}</Text>
-
-      <TouchableOpacity onPress={handleSocio} style={styles.button}>
-        <Text style={styles.buttonText}>SAIR</Text>
-        <MaterialCommunityIcons name="exit-run" size={20} color="#FFF" />
-      </TouchableOpacity>
-      
-    </View>
     </ImageBackground>
   );
 }
@@ -73,7 +66,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     marginHorizontal: 20,
     marginVertical: 20,
- 
+
   },
   title: {
     color: "#000000",
