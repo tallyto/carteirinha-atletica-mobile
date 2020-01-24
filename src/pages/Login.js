@@ -11,6 +11,7 @@ import {
 } from "react-native";
 
 import api from "./../services/api";
+import logo from './../../assets/logo.png'
 
 export default function Login({ navigation }) {
   const [document, setDocument] = useState("");
@@ -51,6 +52,8 @@ export default function Login({ navigation }) {
   }, []);
   return (
     <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
+      
+      <Image source={logo} style={{height: 300, width: 300}}/>
       <TextInput
         autoCapitalize="none"
         autoCorrect={false}
