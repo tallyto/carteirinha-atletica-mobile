@@ -11,20 +11,39 @@ import {
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 export default function Carteirinha({ navigation }) {
-  const [user,setUser] = useState("")
+  const [user, setUser] = useState("");
   async function handleSair() {
- 
-    navigation.navigate("Login")
+    
+    await AsyncStorage.setItem("@socio", "")
+
+    navigation.navigate("Login");
+    // await AsyncStorage.setItem("@socio","")
   }
 
+  async function handlerDados(){
+    const userDB = await AsyncStorage.getItem("@socio");
+    if(userDB){
+      const db = await JSON.parse(userDB);
+      setUser(db)
+    }
+    
+  }
+ useEffect( ()=>{
+   handlerDados()
+ })
 
+ if(!user){
+   return null
+ }
   return (
     <ImageBackground
-      style={{ flex: 1, width: '100%', height: '100%' }}
-      source={{ uri: "https://carteirinha-atletica.s3-sa-east-1.amazonaws.com/background2.png" }}
+      style={{ flex: 1, width: "100%", height: "100%" }}
+      source={{
+        uri:
+          "https://carteirinha-atletica.s3-sa-east-1.amazonaws.com/background2.png"
+      }}
     >
       <View style={styles.container}>
-
         <Text style={styles.header}>SÓCIO</Text>
         <Text style={styles.atletica}>A. A. A. M - UFRR</Text>
 
@@ -40,8 +59,8 @@ export default function Carteirinha({ navigation }) {
         {user.isValid ? (
           <Text style={styles.valid}>VALIDO</Text>
         ) : (
-            <Text style={styles.invalid}>INVALIDO</Text>
-          )}
+          <Text style={styles.invalid}>INVALIDO</Text>
+        )}
 
         <Text style={styles.title}>{user.name}</Text>
         <Text style={styles.description}>MATRÍCULA: {user.matricula}</Text>
@@ -52,7 +71,6 @@ export default function Carteirinha({ navigation }) {
           <Text style={styles.buttonText}>SAIR</Text>
           <MaterialCommunityIcons name="exit-run" size={20} color="#FFF" />
         </TouchableOpacity>
-
       </View>
     </ImageBackground>
   );
@@ -65,8 +83,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "column",
     marginHorizontal: 20,
-    marginVertical: 20,
-
+    marginVertical: 20
   },
   title: {
     color: "#000000",
