@@ -13,28 +13,26 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 export default function Carteirinha({ navigation }) {
   const [user, setUser] = useState("");
   async function handleSair() {
-    
-    await AsyncStorage.setItem("@socio", "")
+    await AsyncStorage.setItem("@socio", "");
 
     navigation.navigate("Login");
     // await AsyncStorage.setItem("@socio","")
   }
 
-  async function handlerDados(){
+  async function handlerDados() {
     const userDB = await AsyncStorage.getItem("@socio");
-    if(userDB){
+    if (userDB) {
       const db = await JSON.parse(userDB);
-      setUser(db)
+      setUser(db);
     }
-    
   }
- useEffect( ()=>{
-   handlerDados()
- })
+  useEffect(() => {
+    handlerDados();
+  });
 
- if(!user){
-   return null
- }
+  if (!user) {
+    return null;
+  }
   return (
     <ImageBackground
       style={{ flex: 1, width: "100%", height: "100%" }}
@@ -129,7 +127,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.37,
     shadowRadius: 7.49,
-
     elevation: 12,
     borderRadius: 100,
     borderWidth: 1,

@@ -11,7 +11,7 @@ import {
 } from "react-native";
 
 import api from "./../services/api";
-import logo from './../../assets/logo.png'
+import logo from "./../../assets/logo.png";
 
 export default function Login({ navigation }) {
   const [document, setDocument] = useState("");
@@ -29,14 +29,13 @@ export default function Login({ navigation }) {
         if (!value.isValid) {
           setInvalid(`O associado ${value.name} está em débito!`);
           setDocument("");
+        } else {
+          await AsyncStorage.setItem("@socio", JSON.stringify(value));
+          navigation.navigate("Carteirinha");
         }
-      }
-      if (!value) {
-        setInvalid("Usuário inválido!");
-        setDocument("");
-      } else {
-        await AsyncStorage.setItem("@socio", JSON.stringify(value));
-        navigation.navigate("Carteirinha");
+      }else{
+        setInvalid("Usuário invalido");
+          setDocument("");
       }
     } catch (error) {
       console.log(error);
@@ -52,8 +51,7 @@ export default function Login({ navigation }) {
   }, []);
   return (
     <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
-      
-      <Image source={logo} style={{height: 300, width: 300}}/>
+      <Image source={logo} style={{ height: 300, width: 300 }} />
       <TextInput
         autoCapitalize="none"
         autoCorrect={false}
