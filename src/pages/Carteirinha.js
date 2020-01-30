@@ -49,7 +49,7 @@ export default function Carteirinha({ navigation }) {
           <Image
             style={styles.imgProfile}
             source={{
-              uri: "https://avatars3.githubusercontent.com/u/28845658?s=460&v=4"
+              uri: user.img.url
             }}
           />
         </View>
@@ -60,7 +60,7 @@ export default function Carteirinha({ navigation }) {
           <Text style={styles.invalid}>INVALIDO</Text>
         )}
 
-        <Text style={styles.title}>{user.name}</Text>
+        <Text style={styles.title}>{user.nome}</Text>
         <Text style={styles.description}>MATRÍCULA: {user.matricula}</Text>
         <Text style={styles.description}>CPF: {user.cpf}</Text>
         <Text style={styles.description}>CURSO: {user.curso}</Text>

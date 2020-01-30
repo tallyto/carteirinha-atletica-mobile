@@ -27,11 +27,11 @@ export default function Login({ navigation }) {
 
       if (value) {
         if (!value.isValid) {
-          setInvalid(`O associado ${value.name} está em débito!`);
+          setInvalid(`O associado ${value.nome} está em débito!`);
           setDocument("");
         } else {
           await AsyncStorage.setItem("@socio", JSON.stringify(value));
-          navigation.navigate("Carteirinha");
+          navigation.navigate("Tab");
         }
       }else{
         setInvalid("Usuário invalido");
@@ -45,7 +45,7 @@ export default function Login({ navigation }) {
   useEffect(() => {
     AsyncStorage.getItem("@socio").then(socio => {
       if (socio) {
-        navigation.navigate("Carteirinha");
+        navigation.navigate("Tab");
       }
     });
   }, []);
