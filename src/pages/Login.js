@@ -31,7 +31,7 @@ export default function Login({ navigation }) {
           setDocument("");
         } else {
           await AsyncStorage.setItem("@socio", JSON.stringify(value));
-          navigation.navigate("Tab");
+          navigation.navigate("Carteirinha");
         }
       }else{
         setInvalid("Usuário invalido");
@@ -45,7 +45,7 @@ export default function Login({ navigation }) {
   useEffect(() => {
     AsyncStorage.getItem("@socio").then(socio => {
       if (socio) {
-        navigation.navigate("Tab");
+        navigation.navigate("Carteirinha");
       }
     });
   }, []);
