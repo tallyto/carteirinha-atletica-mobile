@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, version } from "react";
 import {
   View,
   Text,
@@ -9,6 +9,8 @@ import {
   AsyncStorage
 } from "react-native";
 
+import { LinearGradient } from 'expo-linear-gradient';
+import logo from "./../../assets/logo.png";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 export default function Carteirinha({ navigation }) {
   const [user, setUser] = useState("");
@@ -34,125 +36,120 @@ export default function Carteirinha({ navigation }) {
     return null;
   }
   return (
-    <ImageBackground
-      style={{ flex: 1, width: "100%", height: "100%" }}
-      source={{
-        uri:
-          "https://carteirinha-atletica.s3-sa-east-1.amazonaws.com/background2.png"
-      }}
-    >
+    <LinearGradient
+      colors={['#08AEEA', '#2AF598']}
+      style={{ flex: 1 }}>
       <View style={styles.container}>
-        <Text style={styles.header}>SÓCIO</Text>
-        <Text style={styles.atletica}>A. A. A. M - UFRR</Text>
 
-        <View style={styles.imgView}>
-          <Image
-            style={styles.imgProfile}
-            source={{
-              uri: user.img.url
-            }}
-          />
+        <View style={styles.card}>
+
+          <View style={styles.perfil}>
+
+            <Image
+              style={styles.imgProfile}
+              source={{
+                uri: user.img.url
+              }}
+            />
+
+            <View style={styles.texto}>
+              <Text style={styles.nome}>{user.nome}</Text>
+              <Text style={styles.faculdade}>UFRR</Text>
+              <Text style={styles.curso}>Computação</Text>
+
+            </View>
+          </View>
+          
+          <View style={styles.info}>
+          
+          <View style={styles.headerInfo}>
+          <Image source={logo} style={styles.logo} />
+
+          <View style={styles.textInfo}>
+
+            <Text style={styles.titleInfo}>Situação</Text>
+            <Text style={styles.situation}>ATIVO</Text>
+          </View>
+          </View>
+
+          <View style={styles.information}></View>
+
+          {/* <TouchableOpacity onPress={handleSair} style={styles.button}>
+            <Text style={styles.buttonText}>SAIR</Text>
+            <MaterialCommunityIcons name="exit-run" size={20} color="#FFF" />
+          </TouchableOpacity> */}
+          </View>
+
         </View>
-
-        {user.isValid ? (
-          <Text style={styles.valid}>VALIDO</Text>
-        ) : (
-          <Text style={styles.invalid}>INVALIDO</Text>
-        )}
-
-        <Text style={styles.title}>{user.nome}</Text>
-        <Text style={styles.description}>MATRÍCULA: {user.matricula}</Text>
-        <Text style={styles.description}>CPF: {user.cpf}</Text>
-        <Text style={styles.description}>CURSO: {user.curso}</Text>
-
-        <TouchableOpacity onPress={handleSair} style={styles.button}>
-          <Text style={styles.buttonText}>SAIR</Text>
-          <MaterialCommunityIcons name="exit-run" size={20} color="#FFF" />
-        </TouchableOpacity>
       </View>
-    </ImageBackground>
+    </LinearGradient>
+
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
-    marginHorizontal: 20,
-    marginVertical: 20
   },
-  title: {
-    color: "#000000",
-    fontSize: 25,
-    marginVertical: 5,
-    fontWeight: "bold"
-  },
-  button: {
-    padding: 10,
-    color: "#fff",
-    backgroundColor: "#000000",
-    alignItems: "center",
-    width: 100,
+  card: {
     marginTop: 30,
-    borderRadius: 100,
+    marginHorizontal: 15,
+    flex: 1
+  },
+  perfil: {
     flexDirection: "row",
-    justifyContent: "space-around",
-    borderWidth: 1,
-    borderColor: "#ffd600"
-  },
-  buttonText: {
-    fontSize: 18,
-    color: "#fff"
-  },
-  description: {
-    fontSize: 18,
-    marginVertical: 5
-  },
-  label: {
-    fontSize: 15,
-    marginVertical: 5
+    marginHorizontal: 10,
+    marginVertical: 20,
   },
   imgProfile: {
-    height: 200,
-    width: 200,
-    borderRadius: 100
+    height: 225,
+    width: 175,
+    borderRadius: 15,
   },
-  imgView: {
-    shadowColor: "#000000",
-    shadowOffset: {
-      width: 0,
-      height: 6
-    },
-    shadowOpacity: 0.37,
-    shadowRadius: 7.49,
-    elevation: 12,
-    borderRadius: 100,
-    borderWidth: 1,
-    borderColor: "#ffd600"
+  texto: {padding: 20 },
+  nome: {
+    color: "#ffff",
+    fontSize: 28,
+    fontWeight: "bold"
   },
-  valid: {
-    fontSize: 25,
-    color: "green",
-    fontWeight: "bold",
-    marginVertical: 10
+  faculdade: {
+    color: "#ffff",
+    fontSize: 24,
   },
-  invalid: {
-    fontSize: 25,
-    color: "red",
-    fontWeight: "bold",
-    marginVertical: 10
+  curso: {
+    color: "#ffff",
+    fontSize: 20,
   },
-  header: {
-    fontSize: 35,
-    fontWeight: "bold",
-    marginBottom: 5
+  info: {
+    backgroundColor: "#fff",
+    borderRadius: 20,
+    flex: 1
   },
-  atletica: {
-    fontSize: 30,
-    fontWeight: "bold",
-    marginBottom: 5,
-    color: "#ffd600"
+  logo: {
+    height: 150, width: 150
+  },
+  headerInfo: {
+    marginVertical: 20,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+   
+  },
+  textInfo: {   
+    alignItems: "center"    
+  },
+  titleInfo: {
+    fontSize: 24,
+  },
+  situation: {
+    fontSize: 28,
+    fontWeight: "bold"
+  },
+  information: {
+
+    borderBottomColor: "#c3c3c3",
+    borderBottomWidth: 1,
+    marginHorizontal: 20
   }
+ 
 });
