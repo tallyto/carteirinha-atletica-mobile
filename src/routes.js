@@ -1,10 +1,7 @@
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
-
-
 import Carteirinha from "./pages/Carteirinha";
 import Login from "./pages/Login";
-// import Parceria from "./pages/Parceria";
-
+import Parceiros from "./pages/Parceiros";
 
 const switchNavigator = createSwitchNavigator({
   Login: {
@@ -12,6 +9,9 @@ const switchNavigator = createSwitchNavigator({
   },
   Carteirinha: {
     screen: Carteirinha,
+  },
+  Parceiros: {
+    screen: Parceiros
   }
 });
 

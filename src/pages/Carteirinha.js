@@ -13,6 +13,11 @@ import logo from "./../../assets/logo.png";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 export default function Carteirinha({ navigation }) {
   const [user, setUser] = useState("");
+
+  function handerParceiros(){
+    navigation.navigate("Parceiros");
+  }
+
   async function handleSair() {
     await AsyncStorage.setItem("@socio", "");
 
@@ -33,10 +38,11 @@ export default function Carteirinha({ navigation }) {
   if (!user) {
     return null;
   }
+
   return (
     <LinearGradient
       colors={['#ffd600', '#fff']}
-      style={{ flex: 1 }}>
+      style={styles.gradient}>
       <View style={styles.container}>
 
         <View style={styles.card}>
@@ -57,31 +63,46 @@ export default function Carteirinha({ navigation }) {
 
             </View>
           </View>
-          
+
           <View style={styles.info}>
-          
-          <View style={styles.headerInfo}>
-          <Image source={logo} style={styles.logo} />
 
-          <View style={styles.textInfo}>
+            <View style={styles.headerInfo}>
+              <Image source={logo} style={styles.logo} />
 
-            <Text style={styles.titleInfo}>Situação</Text>
-            <Text style={styles.situation}>ATIVO</Text>
-          </View>
-          </View>
+              <View style={styles.textInfo}>
+                <Text style={styles.titleInfo}>Situação</Text>
+                <Text style={styles.situation}>ATIVO</Text>
+              </View>
 
-          <View style={styles.information}></View>
+            </View>
 
-          <View style={styles.dados}>
+            <View style={styles.line}/>
+
+            <View style={styles.dados}>
+
+            <Text style={styles.title}>CPF</Text>
+              <Text style={styles.date}>{user.cpf}</Text>
+              
+              <Text style={styles.title}>Matricula</Text>
+              <Text style={styles.date}>{user.matricula}</Text>
+
+              <Text style={styles.title}>Validade</Text>
+              <Text style={styles.date}>16/10/2020</Text>
+            </View>
+
+          <View style={styles.button}>
             
-            <Text style={styles.matricula}>Matricula</Text>
-            <Text style={styles.numMatricula}>{user.matricula}</Text>
-          </View>
+            <TouchableOpacity onPress={handerParceiros}   style={styles.actions}>     
+              <MaterialCommunityIcons name="store" size={40} color="#000"  />
+              <Text style={styles.textActions}>Parceiros</Text>
+            </TouchableOpacity>
 
-          <TouchableOpacity onPress={handleSair} style={styles.button}>
-            <Text style={styles.buttonText}>SAIR</Text>
-            <MaterialCommunityIcons name="exit-run" size={20} color="#000" />
-          </TouchableOpacity>
+            <TouchableOpacity onPress={handleSair} style={styles.actions}>
+             <MaterialCommunityIcons name="exit-run" size={40} color="#000" />
+             <Text style={styles.textActions}>Sair</Text>
+           </TouchableOpacity>
+
+            </View>
           </View>
 
         </View>
@@ -92,6 +113,7 @@ export default function Carteirinha({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  gradient: { flex: 1 },
   container: {
     flex: 1,
   },
@@ -110,7 +132,7 @@ const styles = StyleSheet.create({
     width: 175,
     borderRadius: 10,
   },
-  texto: {padding: 20 },
+  texto: { padding: 20 },
   nome: {
     color: "#000",
     fontSize: 28,
@@ -137,10 +159,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
-   
   },
-  textInfo: {   
-    alignItems: "center"    
+  textInfo: {
+    alignItems: "center"
   },
   titleInfo: {
     fontSize: 24,
@@ -149,8 +170,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold"
   },
-  information: {
-
+  line: {
     borderBottomColor: "#c3c3c3",
     borderBottomWidth: 1,
     marginHorizontal: 20
@@ -158,14 +178,26 @@ const styles = StyleSheet.create({
   dados: {
     flex: 1,
     marginVertical: 15,
-    marginHorizontal: 15,
+    marginHorizontal: 30,
     flexDirection: "column"
   },
-  matricula: {
-    fontSize: 30
+  title: {
+    fontSize: 26,
+    color: "#ffd600",
+    fontWeight: "bold"
   },
-  numMatricula: {
+  date: {
     fontSize: 28
+  },
+  button: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginBottom: 20
+  },
+  actions: {
+    alignItems: "center",
+  },
+  textActions: {
+    fontSize: 18
   }
- 
 });
