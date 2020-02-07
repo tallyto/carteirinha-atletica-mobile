@@ -1,4 +1,4 @@
-import React, { useState, useEffect, version } from "react";
+import React, { useState, useEffect} from "react";
 import {
   View,
   Text,
@@ -177,9 +177,9 @@ const styles = StyleSheet.create({
   },
   dados: {
     flex: 1,
-    marginVertical: 15,
-    marginHorizontal: 30,
-    flexDirection: "column"
+    padding: 25,
+    flexDirection: "column",
+
   },
   title: {
     fontSize: 26,

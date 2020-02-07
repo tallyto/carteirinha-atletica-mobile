@@ -1,0 +1,31 @@
+[
+    {
+        "key": 1,
+        "loja": "Papo de Boleiro",
+        "promotion": "Desconto de 10%"
+    },
+    {
+        "key": 2,
+        "loja": "Kings",
+        "promotion": "Desconto de 10%"
+    },{
+        "key": 3,
+        "loja": "BlackStudio Tattoo",
+        "promotion": "Desconto de 10%"
+    },
+    {
+        "key": 4,
+        "loja": "Chico do Carneiro",
+        "promotion": "Desconto de 10%"
+    },
+    {
+        "key": 5,
+        "loja": "Browne.com",
+        "promotion": "Desconto de 10%"
+    },
+    {
+        "key": 6,
+        "loja": "Doce Pimenta",
+        "promotion": "Desconto de 10%"
+    }
+]
