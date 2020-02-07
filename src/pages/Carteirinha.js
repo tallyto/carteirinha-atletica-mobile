@@ -5,7 +5,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
-  ImageBackground,
   AsyncStorage
 } from "react-native";
 
@@ -18,7 +17,6 @@ export default function Carteirinha({ navigation }) {
     await AsyncStorage.setItem("@socio", "");
 
     navigation.navigate("Login");
-    // await AsyncStorage.setItem("@socio","")
   }
 
   async function handlerDados() {
@@ -37,7 +35,7 @@ export default function Carteirinha({ navigation }) {
   }
   return (
     <LinearGradient
-      colors={['#08AEEA', '#2AF598']}
+      colors={['#ffd600', '#fff']}
       style={{ flex: 1 }}>
       <View style={styles.container}>
 
@@ -74,10 +72,16 @@ export default function Carteirinha({ navigation }) {
 
           <View style={styles.information}></View>
 
-          {/* <TouchableOpacity onPress={handleSair} style={styles.button}>
+          <View style={styles.dados}>
+            
+            <Text style={styles.matricula}>Matricula</Text>
+            <Text style={styles.numMatricula}>{user.matricula}</Text>
+          </View>
+
+          <TouchableOpacity onPress={handleSair} style={styles.button}>
             <Text style={styles.buttonText}>SAIR</Text>
-            <MaterialCommunityIcons name="exit-run" size={20} color="#FFF" />
-          </TouchableOpacity> */}
+            <MaterialCommunityIcons name="exit-run" size={20} color="#000" />
+          </TouchableOpacity>
           </View>
 
         </View>
@@ -104,20 +108,20 @@ const styles = StyleSheet.create({
   imgProfile: {
     height: 225,
     width: 175,
-    borderRadius: 15,
+    borderRadius: 10,
   },
   texto: {padding: 20 },
   nome: {
-    color: "#ffff",
+    color: "#000",
     fontSize: 28,
     fontWeight: "bold"
   },
   faculdade: {
-    color: "#ffff",
+    color: "#000",
     fontSize: 24,
   },
   curso: {
-    color: "#ffff",
+    color: "#000",
     fontSize: 20,
   },
   info: {
@@ -126,7 +130,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   logo: {
-    height: 150, width: 150
+    height: 100, width: 100
   },
   headerInfo: {
     marginVertical: 20,
@@ -150,6 +154,18 @@ const styles = StyleSheet.create({
     borderBottomColor: "#c3c3c3",
     borderBottomWidth: 1,
     marginHorizontal: 20
+  },
+  dados: {
+    flex: 1,
+    marginVertical: 15,
+    marginHorizontal: 15,
+    flexDirection: "column"
+  },
+  matricula: {
+    fontSize: 30
+  },
+  numMatricula: {
+    fontSize: 28
   }
  
 });

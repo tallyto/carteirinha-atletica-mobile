@@ -19,7 +19,7 @@ export default function Login({ navigation }) {
 
   async function handleLogin() {
     try {
-      const response = await api.get("/listar/socio", {
+      const response = await api.get("/api/show", {
         params: { cpf: document }
       });
 
