@@ -10,9 +10,7 @@ export default function Parceiros({ navigation }) {
     navigation.navigate("Carteirinha");
   }
 
-
   return (
-
     <View style={styles.container}>
       <View style={styles.parceiros}>
       {parceiro.map((item) => (
@@ -26,7 +24,6 @@ export default function Parceiros({ navigation }) {
         </View>
       ))}
 
-
       <TouchableOpacity onPress={handleCarteirinha} style={styles.actions}>
         <MaterialCommunityIcons name="keyboard-backspace" size={40} color="#000" />
         <Text style={styles.textActions}>Voltar</Text>
@@ -34,7 +31,6 @@ export default function Parceiros({ navigation }) {
 
       </View>
     </View>
-
   );
 }
 
@@ -47,10 +43,8 @@ const styles = StyleSheet.create({
   parceiros: {
     marginTop: 60,
     marginHorizontal: 30,
-    flex: 1,
- 
+    flex: 1, 
   },
-
   viewList: {
     flexDirection: "row",
     justifyContent: 'space-around',

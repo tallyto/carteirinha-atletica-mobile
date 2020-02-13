@@ -86,8 +86,8 @@ export default function Carteirinha({ navigation }) {
               <Text style={styles.title}>Matricula</Text>
               <Text style={styles.date}>{user.matricula}</Text>
 
-              <Text style={styles.title}>Validade</Text>
-              <Text style={styles.date}>16/10/2020</Text>
+              {/* <Text style={styles.title}>Validade</Text>
+              <Text style={styles.date}>16/10/2020</Text> */}
             </View>
 
           <View style={styles.button}>

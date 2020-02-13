@@ -15,27 +15,26 @@ import logo from "./../../assets/logo.png";
 
 export default function Login({ navigation }) {
   const [document, setDocument] = useState("");
-  const [invalid, setInvalid] = useState("");
 
   async function handleLogin() {
     try {
-      const response = await api.get("/api/show", {
+      const response = await api.get("/api/socio/show", {
         params: { cpf: document }
       });
 
       const value = response.data;
 
-      if (value) {
+      if (!value) {
+        setInvalid("Usuário invalido");
+        setDocument("");
+      } else {
         if (!value.isValid) {
-          setInvalid(`O associado ${value.nome} está em débito!`);
+          setInvalid(`O associado ${value.nome} está em débito`);
           setDocument("");
         } else {
           await AsyncStorage.setItem("@socio", JSON.stringify(value));
           navigation.navigate("Carteirinha");
         }
-      }else{
-        setInvalid("Usuário invalido");
-          setDocument("");
       }
     } catch (error) {
       console.log(error);
@@ -66,7 +65,6 @@ export default function Login({ navigation }) {
       <TouchableOpacity onPress={handleLogin} style={styles.button}>
         <Text style={styles.buttonText}>Entrar</Text>
       </TouchableOpacity>
-      {invalid ? <Text style={styles.invalid}>{invalid}</Text> : null}
     </KeyboardAvoidingView>
   );
 }
@@ -96,7 +94,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginTop: 10,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   buttonText: {
     color: "#FFF",
